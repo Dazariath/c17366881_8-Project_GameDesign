@@ -22,25 +22,11 @@ public class NewCharacterController : MonoBehaviour {
         m_animator = GetComponent<Animator>();                  //Gets Player Animator
     }    
 
-    public void Move(float turn,float forward, bool jump, bool sprint) //Move Function with variables
+    public void Move(float turn,float forward) //Move Function with variables
     {
 
         m_animator.SetFloat("turn", turn);                              //turn and forward floats for movement
         m_animator.SetFloat("forward", forward);
-
-        if (jump)                                                       //activates jump trigger
-        {
-            m_animator.SetTrigger("Jump");
-        }
-
-        if (sprint)                                                     //activates sprinting and deactivates it once CNTRL is released
-        {
-            m_animator.SetBool("IsSprinting", true);
-        }
-        else
-        {
-            m_animator.SetBool("IsSprinting", false);
-        }
 
         //Sprinting();
     }
@@ -69,27 +55,27 @@ public class NewCharacterController : MonoBehaviour {
 
     }
 
-    public void Combat(bool HPunch, bool BAttack, bool LKick, bool RPunch, bool RKick)                      //Combat Function with variables
+    public void Combat(float Side, bool LBlock, bool RBlock, bool LLight, bool RLight, bool HButt)                      //Combat Function with variables
     {
-        if (LKick)                                  //Plays Left kick animation and reduces enemy health
+        if (LLight)                                  //Plays Left Light animation and reduces enemy health
         {
-            m_animator.SetTrigger("LeftKick");
-            EnemyLoseHealth();
+            m_animator.SetTrigger("LeftLight");
+            //EnemyLoseHealth();
         }
 
-        if (RKick)                                  //Plays Right kick animation
+        if (RLight)                                  //Plays Right kick animation
         {
-            m_animator.SetTrigger("RightKick");
-            EnemyLoseHealth();
+            m_animator.SetTrigger("RightLight");
+            //EnemyLoseHealth();
         }
 
-        if (RPunch)                                 //Plays Left Hook animation
+        if (HButt)                                 //Plays Left Hook animation
         {
-            m_animator.SetTrigger("LeftHook");
-            EnemyLoseHealth();
+            m_animator.SetTrigger("HeadButt");
+            //EnemyLoseHealth();
         }
 
-        if (HPunch)                                 //Plays Right Hook animation
+        /*if (HPunch)                                 //Plays Right Hook animation
         {
             m_animator.SetTrigger("RightHook");
             EnemyLoseHealth();
@@ -108,7 +94,7 @@ public class NewCharacterController : MonoBehaviour {
         {
             EnemyDead();
         }
-
+        */
     }
 
     

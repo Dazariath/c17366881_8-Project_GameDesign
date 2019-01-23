@@ -7,14 +7,14 @@ public class NewUserControl : MonoBehaviour
 
     private float m_turn;                                   //Turn and Forward Floats
     private float m_forward;
-    private bool m_jump;                                    //Jump Trigger
-    private bool m_sprint;                                  //Sprint Bool
+    private float m_Side;
 
-    private bool m_BlockAttack;                             //Block Bool
-    private bool m_Hpunch;                                  //punch and kick attack triggers
-    private bool m_Rpunch;
-    private bool m_LeftKick;
-    private bool m_RightKick;
+    private bool m_BLeft;                             //Block float
+    private bool m_BRight;
+
+    private bool m_LRight;                                  //punch and kick attack triggers
+    private bool m_LLeft;
+    private bool m_HeadB;
 
     private NewCharacterController m_character;             //gets character conroller
 
@@ -29,17 +29,24 @@ public class NewUserControl : MonoBehaviour
         // Get Inputs
         m_turn = Input.GetAxis("Horizontal");
         m_forward = Input.GetAxis("Vertical");
-        m_jump = Input.GetButtonDown("Jump");
-        m_sprint = Input.GetButton("Fire1");
 
-        m_BlockAttack = Input.GetKey(KeyCode.I);                                        //sets trigger to true as long as I is held down
-        m_Hpunch = Input.GetKeyDown(KeyCode.O);                                         //sets bools to true once these keys are pressed once
-        m_Rpunch = Input.GetKeyDown(KeyCode.U);
-        m_LeftKick = Input.GetKeyDown(KeyCode.J);
-        m_RightKick = Input.GetKeyDown(KeyCode.L);
+        m_Side = Input.GetAxis("Mouse X");                          //sets trigger to true depending on where the mouse is and what button you press
 
-        m_character.Move(m_turn, m_forward, m_jump, m_sprint);                              //establshed the Move function in the User control script
+        if (m_Side < 0)
+        {
+            m_BLeft = Input.GetKey(KeyCode.K);
+        }
+        else
+        {
+            m_BRight = Input.GetKey(KeyCode.L);
+        }
+                                      
+        m_HeadB = Input.GetKeyDown(KeyCode.O);                                         //sets bools to true once these keys are pressed once
+        m_LRight = Input.GetKeyDown(KeyCode.P);
+        m_LLeft = Input.GetKeyDown(KeyCode.I);
 
-        m_character.Combat(m_Hpunch, m_BlockAttack, m_LeftKick, m_Rpunch, m_RightKick);     //establshed the Combat function in the User control script
+        m_character.Move(m_turn, m_forward);                              //establshed the Move function in the User control script
+
+        m_character.Combat(m_Side, m_BLeft, m_BRight, m_LLeft, m_LRight, m_HeadB);     //establshed the Combat function in the User control script
     }
 }

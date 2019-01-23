@@ -25,8 +25,8 @@ public class NewCharacterController : MonoBehaviour {
     public void Move(float turn,float forward) //Move Function with variables
     {
 
-        m_animator.SetFloat("turn", turn);                              //turn and forward floats for movement
-        m_animator.SetFloat("forward", forward);
+        m_animator.SetFloat("Turn", turn);                              //turn and forward floats for movement
+        m_animator.SetFloat("Forward", forward);
 
         //Sprinting();
     }
@@ -55,8 +55,18 @@ public class NewCharacterController : MonoBehaviour {
 
     }
 
-    public void Combat(float Side, bool LBlock, bool RBlock, bool LLight, bool RLight, bool HButt)                      //Combat Function with variables
+    public void Combat(bool LBlock, bool RBlock, bool LLight, bool RLight, bool HButt)                      //Combat Function with variables
     {
+        if (LBlock)
+        {
+            m_animator.SetTrigger("LeftBlock");
+        }
+
+        if (RBlock)
+        {
+            m_animator.SetTrigger("RightBlock");
+        }
+
         if (LLight)                                  //Plays Left Light animation and reduces enemy health
         {
             m_animator.SetTrigger("LeftLight");

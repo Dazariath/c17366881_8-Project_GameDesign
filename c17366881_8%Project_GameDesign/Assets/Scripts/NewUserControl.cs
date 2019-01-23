@@ -7,11 +7,9 @@ public class NewUserControl : MonoBehaviour
 
     private float m_turn;                                   //Turn and Forward Floats
     private float m_forward;
-    private float m_Side;
 
     private bool m_BLeft;                             //Block float
     private bool m_BRight;
-
     private bool m_LRight;                                  //punch and kick attack triggers
     private bool m_LLeft;
     private bool m_HeadB;
@@ -28,25 +26,18 @@ public class NewUserControl : MonoBehaviour
     {
         // Get Inputs
         m_turn = Input.GetAxis("Horizontal");
-        m_forward = Input.GetAxis("Vertical");
+        m_forward = Input.GetAxis("Vertical");                      //sets trigger to true depending on where the mouse is and what button you press
 
-        m_Side = Input.GetAxis("Mouse X");                          //sets trigger to true depending on where the mouse is and what button you press
-
-        if (m_Side < 0)
-        {
-            m_BLeft = Input.GetKey(KeyCode.K);
-        }
-        else
-        {
-            m_BRight = Input.GetKey(KeyCode.L);
-        }
+        m_BLeft = Input.GetKeyDown(KeyCode.J);
+        m_BRight = Input.GetKeyDown(KeyCode.L);        
+        m_BRight = Input.GetKeyDown(KeyCode.L);        
                                       
-        m_HeadB = Input.GetKeyDown(KeyCode.O);                                         //sets bools to true once these keys are pressed once
-        m_LRight = Input.GetKeyDown(KeyCode.P);
-        m_LLeft = Input.GetKeyDown(KeyCode.I);
+        m_HeadB = Input.GetKeyDown(KeyCode.I);                                         //sets bools to true once these keys are pressed once
+        m_LRight = Input.GetKeyDown(KeyCode.O);
+        m_LLeft = Input.GetKeyDown(KeyCode.U);
 
         m_character.Move(m_turn, m_forward);                              //establshed the Move function in the User control script
 
-        m_character.Combat(m_Side, m_BLeft, m_BRight, m_LLeft, m_LRight, m_HeadB);     //establshed the Combat function in the User control script
+        m_character.Combat(m_BLeft, m_BRight, m_LLeft, m_LRight, m_HeadB);     //establshed the Combat function in the User control script
     }
 }

@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class NewUserControl : MonoBehaviour
 {
-    [SerializeField] Transform target;
-
-    private int targetOffset = 0;
 
     private float m_turn;                                   //Turn and Forward Floats
     private float m_forward;
@@ -41,15 +38,5 @@ public class NewUserControl : MonoBehaviour
         m_character.Move(m_turn, m_forward);                              //establshed the Move function in the User control script
 
         m_character.Combat(m_BLeft, m_BRight, m_LLeft, m_LRight, m_HeadB);     //establshed the Combat function in the User control script
-
-        FaceEnemy();
     }
-
-    void FaceEnemy()
-    {
-        Vector3 direction = (target.position - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3((direction.x) + targetOffset, 0, direction.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
-    }
-
 }

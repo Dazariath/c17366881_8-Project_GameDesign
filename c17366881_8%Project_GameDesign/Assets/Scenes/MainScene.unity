@@ -429,6 +429,7 @@ Rigidbody:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> parent of c188a61... dunno
 --- !u!4 &655597723 stripped
@@ -481,6 +482,8 @@ MonoBehaviour:
 >>>>>>> parent of 23daee7... added enemy and looking function
 =======
 >>>>>>> parent of c188a61... dunno
+=======
+>>>>>>> parent of 23daee7... added enemy and looking function
 --- !u!1 &1619228439
 GameObject:
   m_ObjectHideFlags: 0

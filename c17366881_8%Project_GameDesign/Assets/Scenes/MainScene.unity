@@ -424,6 +424,7 @@ Rigidbody:
   m_Constraints: 112
   m_CollisionDetection: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!4 &655597723 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400138, guid: de5d4feef883ada46bc09ec69d371aba,
@@ -461,6 +462,8 @@ MonoBehaviour:
   m_enemyTrans: {fileID: 23821322}
   m_EnemyAnim: {fileID: 23821321}
   EnemyCloseness: 50
+=======
+>>>>>>> parent of 23daee7... added enemy and looking function
 =======
 >>>>>>> parent of 23daee7... added enemy and looking function
 --- !u!1 &1619228439

@@ -168,6 +168,14 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 98e8ec91dbab25b4eb7b01853ee47613, type: 2}
+    - target: {fileID: 100138, guid: de5d4feef883ada46bc09ec69d371aba, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 100138, guid: de5d4feef883ada46bc09ec69d371aba, type: 3}
+      propertyPath: m_Name
+      value: Player1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de5d4feef883ada46bc09ec69d371aba, type: 3}
   m_IsPrefabAsset: 0
@@ -232,17 +240,11 @@ MonoBehaviour:
   m_enemyTrans: {fileID: 655597723}
   m_EnemyAnim: {fileID: 655597724}
   EnemyCloseness: 50
---- !u!114 &23821320
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 23821315}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50a590839fb60fb448d0fd8d29d6a3e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+--- !u!95 &23821321 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9500000, guid: de5d4feef883ada46bc09ec69d371aba,
+    type: 3}
+  m_PrefabInternal: {fileID: 23821314}
 --- !u!4 &23821322 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400138, guid: de5d4feef883ada46bc09ec69d371aba,
@@ -376,7 +378,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100138, guid: de5d4feef883ada46bc09ec69d371aba, type: 3}
       propertyPath: m_Name
-      value: xbot (1)
+      value: Player2
       objectReference: {fileID: 0}
     - target: {fileID: 400138, guid: de5d4feef883ada46bc09ec69d371aba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -440,16 +442,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 655597720}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2b77bd1c715146478838b6fdd975fc7, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f5fe15178e4bbd429aa9b01f7ab50f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_NavMeshAgent: {fileID: 0}
-  m_playerdist: {fileID: 23821322}
-  m_Manager: {fileID: 0}
-  m_FieldOfView: 120
-  m_ThresholdDistance: 1
-  m_Waypoints: []
-  m_Player: {fileID: 23821315}
+--- !u!114 &655597726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 655597720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5093dff49b309754e90c9bb75cc119ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EnemyHealth: 50
+  m_enemy: {fileID: 23821315}
+  m_enemyTrans: {fileID: 23821322}
+  m_EnemyAnim: {fileID: 23821321}
+  EnemyCloseness: 50
 --- !u!1 &1619228439
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,6 +469,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1619228440}
+  - component: {fileID: 1619228441}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -478,6 +490,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1619228441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1619228439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f0844119a3cfed4983b6b9cf2ac5d5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AnimPlayer: {fileID: 0}
+  m_PlayerHealth: 100
+  m_AnimEnemy: {fileID: 0}
 --- !u!1 &1795196302
 GameObject:
   m_ObjectHideFlags: 0

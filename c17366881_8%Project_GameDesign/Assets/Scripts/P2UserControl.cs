@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewUserControl : MonoBehaviour
+public class P2UserControl : MonoBehaviour
 {
     [SerializeField] Transform target;
 
@@ -31,12 +31,13 @@ public class NewUserControl : MonoBehaviour
         m_turn = Input.GetAxis("Horizontal");
         m_forward = Input.GetAxis("Vertical");                      //sets trigger to true depending on where the mouse is and what button you press
 
-        m_BLeft = (Input.GetKeyDown(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Q));
-        m_BRight = (Input.GetKeyDown(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.E));        
-                                      
-        m_HeadB = Input.GetKeyDown(KeyCode.Space);                                         //sets bools to true once these keys are pressed once
-        m_LRight = Input.GetKeyDown(KeyCode.E);
-        m_LLeft = Input.GetKeyDown(KeyCode.Q);
+        m_BLeft = Input.GetKeyDown(KeyCode.J);
+        m_BRight = Input.GetKeyDown(KeyCode.L);
+        m_BRight = Input.GetKeyDown(KeyCode.L);
+
+        m_HeadB = Input.GetKeyDown(KeyCode.I);                                         //sets bools to true once these keys are pressed once
+        m_LRight = Input.GetKeyDown(KeyCode.O);
+        m_LLeft = Input.GetKeyDown(KeyCode.U);
 
         m_character.Move(m_turn, m_forward);                              //establshed the Move function in the User control script
 

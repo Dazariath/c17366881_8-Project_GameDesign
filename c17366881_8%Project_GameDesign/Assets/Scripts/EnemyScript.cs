@@ -5,8 +5,9 @@ using UnityEngine.AI;
 
 public class EnemyScript : MonoBehaviour
 {
+    private int targetOffset = 0;
 
-    private enum NPCState { CHASE, PATROL, KILL };              //sets all 3 states
+    private enum NPCState { CHASE, KILL };              //sets all 3 states
     private NPCState m_NPCState;                                //used to call the states
 
     [SerializeField]private NavMeshAgent m_NavMeshAgent;        //calls enemies navmesh
@@ -15,7 +16,7 @@ public class EnemyScript : MonoBehaviour
     private bool m_IsPlayerNear;                                //checks if player is near
     private Animator m_Animator;                                //calls enemy enemy animator
 
-    public Transform m_playerdist;                              //contains the player's position
+    [SerializeField] Transform m_playerdist;                              //contains the player's position
 
     private bool m_enemyDeath;                                  //reads whether enemy is dead or not 
 
@@ -28,7 +29,7 @@ public class EnemyScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        m_NPCState = NPCState.PATROL;                           //sets patrol as the default
+        m_NPCState = NPCState.CHASE;                           //sets patrol as the default
         m_NavMeshAgent = GetComponent<NavMeshAgent>();          //calls the enemies navmesh agent into the script
         m_Animator = GetComponent<Animator>();                  //gets animator into the script
         m_CurrentWaypoint = 0;                                  //sets the first waypoint as the current waypoint
@@ -47,9 +48,6 @@ public class EnemyScript : MonoBehaviour
 
         switch (m_NPCState)                                     //activate functions depending on the NPC state
         {
-            case NPCState.PATROL:
-                Patrol();
-                break;
             case NPCState.CHASE:
                 Chase();
                 break;
@@ -58,21 +56,15 @@ public class EnemyScript : MonoBehaviour
                 break;
             default:
                 break;
-        }        
+        }
+
+        FacePlayer();
     }
 
     void CheckPlayer()                                          //changes the state of the NPC if the Player is within or outside of range
     {
-        if (m_NPCState == NPCState.PATROL && m_IsPlayerNear)    //if the NPC is patrolling and the player is near, change state to CHASE
-        {
-            m_NPCState = NPCState.CHASE;
-            m_Animator.SetFloat("Forward", 2);
-            return;
-        }
-
         if (m_NPCState == NPCState.CHASE)                       //if NPC is chasing ad the player is outside of range, patrol
         {
-            m_NPCState = NPCState.PATROL;
             m_Animator.SetFloat("Forward", 1);
         }
     }
@@ -85,16 +77,21 @@ public class EnemyScript : MonoBehaviour
 
         if (range <= 2.9)                                                               //if the player is within range the attack animation if
         {
-            m_Animator.SetTrigger("LegSweep");
+            m_Animator.SetTrigger("LightLeft");
             m_NavMeshAgent.SetDestination(m_Player.transform.position);
         }
         else
         {
-            m_NPCState = NPCState.PATROL;                                               //sets the NPC state to Patrol once the player is outside of range
+            m_NPCState = NPCState.CHASE;                                               //sets the NPC state to Patrol once the player is outside of range
         }
     }
 
-    
+    void FacePlayer()
+    {
+        Vector3 direction = (m_playerdist.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3((direction.x) + targetOffset, 0, direction.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+    }
 
     void Chase()                                                                        //
     {
@@ -107,7 +104,7 @@ public class EnemyScript : MonoBehaviour
         }
         else
         {
-            m_NPCState = NPCState.PATROL;
+            m_NPCState = NPCState.CHASE;
         }
         //
     }
@@ -145,15 +142,6 @@ public class EnemyScript : MonoBehaviour
         return false;
     }
     //*/
-
-    void Patrol()                                                                   //sets the patrol function where the enemy goes from waypoint to waypoint and prints which waypoint they are goin gto and if they are patrolling
-    {
-        Debug.Log("Patrolling");
-
-        CheckWaypointDistance();
-        m_NavMeshAgent.SetDestination(m_Waypoints[m_CurrentWaypoint].position);
-        Debug.Log("Going to: " + m_CurrentWaypoint);
-    }
 
     void CheckWaypointDistance()                                                //checks the distance to the next waypoint
     {
@@ -211,10 +199,6 @@ public class EnemyScript : MonoBehaviour
         if (m_NPCState == NPCState.CHASE)
         {
             m_Animator.SetFloat("Forward", 2);
-        }
-        else
-        {
-            m_Animator.SetFloat("Forward", 1);
         }
 
         /*float range = Vector3.Distance(m_playerdist.position, transform.position);
